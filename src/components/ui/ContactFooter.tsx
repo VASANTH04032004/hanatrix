@@ -178,8 +178,11 @@ export default function ContactFooter() {
 
                 {/* Copyright Footer */}
                 <div className="mt-20 pt-8 border-t border-gray-800 text-center flex flex-col items-center justify-center gap-4">
-                    <div className="font-display font-bold text-3xl tracking-tight text-white/50">
+                    <div className="font-display font-bold text-3xl tracking-tight text-white/50 flex flex-col items-center">
                         Hanatrix
+                        <span className="text-[0.65rem] uppercase tracking-[0.2em] text-violet-primary/50 font-bold mt-1">
+                            Eternal Play Power
+                        </span>
                     </div>
                     <p className="text-gray-500 text-sm">
                         © 2026 Hanatrix. All rights reserved. | Designed with ❤️ for magical worlds.

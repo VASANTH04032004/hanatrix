@@ -47,9 +47,14 @@ export default function Navbar() {
                             priority
                         />
                     </div>
-                    <span className="font-display font-bold text-3xl tracking-tight bg-gradient-to-r from-violet-light to-violet-primary bg-clip-text text-transparent">
-                        Hanatrix
-                    </span>
+                    <div className="flex flex-col">
+                        <span className="font-display font-bold text-3xl tracking-tight bg-gradient-to-r from-violet-light to-violet-primary bg-clip-text text-transparent">
+                            Hanatrix
+                        </span>
+                        <span className="text-[0.65rem] uppercase tracking-[0.2em] text-violet-primary font-bold mt-[-4px]">
+                            Eternal Play Power
+                        </span>
+                    </div>
                 </Link>
 
                 {/* Desktop Nav */}

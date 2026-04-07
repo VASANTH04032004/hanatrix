@@ -2,7 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Environment, PresentationControls, RoundedBox, Float, Text, Cylinder } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ProductModel } from "@/components/3d/ProductModel";
 
 function ShelfItem({ position, children }: { position: [number, number, number], children: React.ReactNode }) {
@@ -22,6 +22,7 @@ function ShelfItem({ position, children }: { position: [number, number, number],
 }
 
 export default function Gallery3D() {
+    const [container, setContainer] = useState<HTMLElement | null>(null);
     return (
         <div className="w-full relative py-20 bg-dark-bg overflow-hidden" id="gallery">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-violet-deep/30 via-dark-bg to-dark-bg"></div>
@@ -37,8 +38,9 @@ export default function Gallery3D() {
                 </div>
             </div>
 
-            <div className="w-full h-[600px] relative mt-10">
-                <Canvas camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
+            <div ref={setContainer as any} className="w-full h-[600px] relative mt-10">
+                {container && (
+                <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[10, 10, 5]} intensity={1} />
 
@@ -115,6 +117,7 @@ export default function Gallery3D() {
 
                     <Environment preset="city" />
                 </Canvas>
+                )}
             </div>
         </div>
     );

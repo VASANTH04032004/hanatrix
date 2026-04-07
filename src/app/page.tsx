@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -13,6 +14,13 @@ const KidsFunZone = dynamic(() => import("@/components/ui/KidsFunZone"), { ssr: 
 const Gallery3D = dynamic(() => import("@/components/ui/Gallery3D"), { ssr: false });
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between overflow-x-hidden">
       {/* 1. HERO SECTION */}

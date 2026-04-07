@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, ContactShadows, PresentationControls, Sparkles } from "@react-three/drei";
 import { ProductModel, ToyType } from "@/components/3d/ProductModel";
@@ -45,9 +45,10 @@ const products = [
 
 export default function InteractiveToyWorld() {
     const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+    const [container, setContainer] = useState<HTMLElement | null>(null);
 
     return (
-        <div className="w-full relative py-20 bg-dark-bg overflow-hidden" id="toy-world">
+        <div ref={setContainer as any} className="w-full relative py-20 bg-dark-bg overflow-hidden" id="toy-world">
             {/* Decorative background blobs */}
             <div className="absolute top-20 left-10 w-64 h-64 bg-violet-primary/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
             <div className="absolute top-40 right-10 w-72 h-72 bg-violet-medium/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -71,7 +72,7 @@ export default function InteractiveToyWorld() {
                             onClick={() => setSelectedProduct(product)}
                         >
                             <div className="absolute inset-0 w-full h-full pointer-events-none">
-                                <Canvas camera={{ position: [0, 0, 5], fov: 40 }} dpr={[1, 2]}>
+                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 5], fov: 40 }} dpr={[1, 2]}>
                                     <ambientLight intensity={0.5} />
                                     <directionalLight position={[10, 10, 5]} intensity={1.5} />
                                     <PresentationControls
@@ -85,7 +86,7 @@ export default function InteractiveToyWorld() {
                                         </Suspense>
                                     </PresentationControls>
                                     <Environment preset="city" />
-                                </Canvas>
+                                </Canvas>}
                             </div>
 
                             <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-dark-surface via-dark-surface/80 to-transparent pointer-events-none transform translate-y-4 group-hover:translate-y-0 transition-transform">
@@ -122,7 +123,7 @@ export default function InteractiveToyWorld() {
                             </button>
 
                             <div className="w-full md:w-1/2 h-80 md:h-[500px] bg-dark-surface relative border-none border-0">
-                                <Canvas camera={{ position: [0, 0, 8], fov: 40 }} dpr={[1, 2]}>
+                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 8], fov: 40 }} dpr={[1, 2]}>
                                     <ambientLight intensity={0.7} />
                                     <directionalLight position={[10, 10, 10]} intensity={1.5} />
                                     <PresentationControls
@@ -134,7 +135,7 @@ export default function InteractiveToyWorld() {
                                     </PresentationControls>
                                     <ContactShadows position={[0, -2, 0]} opacity={0.6} scale={10} blur={2} />
                                     <Environment preset="city" />
-                                </Canvas>
+                                </Canvas>}
                             </div>
 
                             <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">

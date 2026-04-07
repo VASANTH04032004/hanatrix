@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, PresentationControls, ContactShadows, RoundedBox, Sphere, Cylinder } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 
 // Stylized Toy Elements since we don't have custom models
@@ -106,8 +106,11 @@ function ToyTrain({ position }: { position: [number, number, number] }) {
 }
 
 export function HeroScene() {
+    const [container, setContainer] = useState<HTMLElement | null>(null);
     return (
-        <Canvas camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]} shadows>
+        <div ref={setContainer as any} className="w-full h-full relative" style={{ touchAction: 'none' }}>
+            {container && (
+            <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]} shadows>
             <color attach="background" args={['transparent']} />
 
             <ambientLight intensity={0.5} />
@@ -150,5 +153,7 @@ export function HeroScene() {
             <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2} far={4} />
             <Environment preset="city" />
         </Canvas>
+        )}
+        </div>
     );
 }
