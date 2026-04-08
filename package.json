@@ -12,6 +12,7 @@
     "@react-three/drei": "^9.96.1",
     "@react-three/fiber": "^8.15.12",
     "@studio-freight/react-lenis": "^0.0.47",
+    "@supabase/supabase-js": "^2.102.1",
     "@types/canvas-confetti": "^1.9.0",
     "@types/three": "^0.160.0",
     "canvas-confetti": "^1.9.4",

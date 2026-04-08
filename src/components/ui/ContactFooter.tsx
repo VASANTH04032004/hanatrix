@@ -4,18 +4,28 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
 import clsx from "clsx";
+import { submitContactForm } from "@/actions/contact";
 
 export default function ContactFooter() {
     const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormState('sending');
-        // Simulate network request
-        setTimeout(() => {
+
+        const formElement = e.currentTarget;
+        const formData = new FormData(formElement);
+        const result = await submitContactForm(formData);
+
+        if (result.success) {
             setFormState('sent');
+            formElement.reset();
             setTimeout(() => setFormState('idle'), 3000);
-        }, 1500);
+        } else {
+            console.error(result.error);
+            alert("Sorry, there was an error sending your message. Please try again.");
+            setFormState('idle');
+        }
     };
 
     return (
@@ -133,6 +143,7 @@ export default function ContactFooter() {
                                 <label className="block text-sm font-bold text-gray-700 mb-2">Your Name</label>
                                 <input
                                     type="text"
+                                    name="name"
                                     required
                                     className="w-full px-4 py-3 rounded-xl bg-white/60 border border-violet-light/50 text-dark-text focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
                                     placeholder="John Doe"
@@ -142,6 +153,7 @@ export default function ContactFooter() {
                                 <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
                                 <input
                                     type="email"
+                                    name="email"
                                     required
                                     className="w-full px-4 py-3 rounded-xl bg-white/60 border border-violet-light/50 text-dark-text focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
                                     placeholder="john@example.com"
@@ -150,6 +162,7 @@ export default function ContactFooter() {
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">Message</label>
                                 <textarea
+                                    name="message"
                                     required
                                     rows={4}
                                     className="w-full px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-white focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all resize-none"
@@ -178,7 +191,7 @@ export default function ContactFooter() {
 
                 {/* Copyright Footer */}
                 <div className="mt-20 pt-8 border-t border-gray-800 text-center flex flex-col items-center justify-center gap-4">
-                    <div className="font-display font-bold text-3xl tracking-tight text-white/50 flex flex-col items-center">
+                    <div className="font-display font-bold text-3xl tracking-tight text-purple/50 flex flex-col items-center">
                         Hanatrix
                         <span className="text-[0.65rem] uppercase tracking-[0.2em] text-violet-primary/50 font-bold mt-1">
                             Eternal Play Power
