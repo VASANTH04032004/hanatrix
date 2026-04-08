@@ -30,15 +30,16 @@ const config: Config = {
           light: "#FDE68A",
           dark: "#D97706",
         },
-        // Keep toy aliases for backward compat but map to violet palette
+        // Unified brand-tuned toy colors
         toy: {
-          red: "#7C3AED",
-          blue: "#8B5CF6",
-          yellow: "#FBBF24",
-          green: "#A78BFA",
-          purple: "#5B21B6",
-          pink: "#C4B5FD",
+          red: "#9333EA",      // purple-600
+          blue: "#7C3AED",     // violet-600
+          yellow: "#FBBF24",   // amber-400
+          green: "#A855F7",    // purple-500
+          purple: "#6B21A8",   // purple-800
+          pink: "#D946EF",     // fuchsia-500
         },
+
         background: "var(--background)",
         foreground: "var(--foreground)",
       },

@@ -36,8 +36,8 @@ export default function Navbar() {
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="group flex items-center gap-4">
-                    <div className="relative w-16 h-16 transform group-hover:scale-105 transition-transform duration-300">
+                <Link href="/" className="group flex items-center gap-2 md:gap-4">
+                    <div className="relative w-12 h-12 md:w-16 md:h-16 transform group-hover:scale-105 transition-transform duration-300">
                         <Image
                             src="/logo.png"
                             alt="Hanatrix Logo"
@@ -48,10 +48,10 @@ export default function Navbar() {
                         />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-display font-bold text-3xl tracking-tight bg-gradient-to-r from-violet-light to-violet-primary bg-clip-text text-transparent">
+                        <span className="font-display font-bold text-2xl md:text-3xl tracking-tight bg-gradient-to-r from-violet-light to-violet-primary bg-clip-text text-transparent">
                             Hanatrix
                         </span>
-                        <span className="text-[0.65rem] uppercase tracking-[0.2em] text-violet-primary font-bold mt-[-4px]">
+                        <span className="text-[0.5rem] md:text-[0.65rem] uppercase tracking-[0.2em] text-violet-primary font-bold mt-[-4px]">
                             Eternal Play Power
                         </span>
                     </div>

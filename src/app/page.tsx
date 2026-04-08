@@ -1,17 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import ContactFooter from "@/components/ui/ContactFooter";
 import StoryTimeline from "@/components/ui/StoryTimeline";
 
-const HeroScene = dynamic(() => import("@/components/3d/HeroScene").then(mod => mod.HeroScene), { ssr: false, loading: () => <div className="w-full h-full flex items-center justify-center"><Loader2 className="animate-spin text-violet-primary w-12 h-12" /></div> });
+const HeroScene = dynamic(() => import("@/components/3d/HeroScene").then(mod => mod.HeroScene), { ssr: false, loading: () => <div className="absolute inset-0 flex items-center justify-center"><Loader2 className="animate-spin text-violet-primary w-10 h-10 opacity-50" /></div> });
 const InteractiveToyWorld = dynamic(() => import("@/components/ui/InteractiveToyWorld"), { ssr: false });
 const KidsFunZone = dynamic(() => import("@/components/ui/KidsFunZone"), { ssr: false });
 const Gallery3D = dynamic(() => import("@/components/ui/Gallery3D"), { ssr: false });
+
+function LazySection({ children, id, className = "" }: { children: React.ReactNode, id: string, className?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "400px 0px" });
+
+  return (
+    <section id={id} ref={ref} className={className}>
+      {isInView ? children : <div className="h-[500px]" />}
+    </section>
+  );
+}
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -25,9 +36,14 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between overflow-x-hidden">
       {/* 1. HERO SECTION */}
       <section className="relative w-full h-[100svh] flex flex-col items-center justify-center pt-20" id="hero">
-        <div className="absolute inset-0 z-0 pointer-events-auto">
+        <motion.div 
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0 z-0 pointer-events-auto"
+        >
           <HeroScene />
-        </div>
+        </motion.div>
 
         {/* Hero Content Overlay */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto pointer-events-none mb-20">
@@ -35,7 +51,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display font-bold text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] tracking-tight text-dark-text mb-6 drop-shadow-sm leading-tight">
+            className="font-display font-bold text-4xl sm:text-5xl md:text-8xl lg:text-[7rem] tracking-tight text-dark-text mb-6 drop-shadow-sm leading-tight">
             <span className="text-purple-300">Enter the</span> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-deep via-violet-primary to-violet-light animate-gradient-x bg-[length:200%_auto]">
               Magic Toy Universe
@@ -74,14 +90,14 @@ export default function Home() {
       </section>
 
       {/* 2. INTERACTIVE TOY WORLD */}
-      <section id="toy-world" className="w-full">
+      <LazySection id="toy-world" className="w-full">
         <InteractiveToyWorld />
-      </section>
+      </LazySection>
 
       {/* 4. KIDS FUN ZONE */}
-      <section id="fun-zone" className="w-full">
+      <LazySection id="fun-zone" className="w-full">
         <KidsFunZone />
-      </section>
+      </LazySection>
 
       {/* 5. STORY TIMELINE */}
       <section id="story" className="w-full">
@@ -89,9 +105,9 @@ export default function Home() {
       </section>
 
       {/* 6. GALLERY 3D */}
-      <section id="gallery" className="w-full">
+      <LazySection id="gallery" className="w-full">
         <Gallery3D />
-      </section>
+      </LazySection>
 
       {/* 7. CONTACT & FOOTER */}
       <ContactFooter />

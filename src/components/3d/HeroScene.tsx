@@ -1,8 +1,8 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, PresentationControls, ContactShadows, RoundedBox, Sphere, Cylinder } from "@react-three/drei";
-import { useRef, useState } from "react";
+import { Environment, Float, PresentationControls, ContactShadows, RoundedBox, Sphere, Cylinder, BakeShadows } from "@react-three/drei";
+import { useRef, useState, Suspense } from "react";
 import * as THREE from "three";
 
 // Stylized Toy Elements since we don't have custom models
@@ -110,16 +110,20 @@ export function HeroScene() {
     return (
         <div ref={(node) => setContainer(node)} className="w-full h-full relative" style={{ touchAction: 'none' }}>
             {container && (
-            <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]} shadows>
-            <color attach="background" args={['transparent']} />
+            <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 1.5]} shadows>
+            <color attach="background" args={['#0D0D12']} />
 
-            <ambientLight intensity={0.5} />
+            {/* Immediate high-quality lighting for instant visibility */}
+            <ambientLight intensity={0.8} />
             <directionalLight
                 position={[10, 10, 5]}
-                intensity={1.2}
+                intensity={1.5}
                 castShadow
                 shadow-mapSize={[1024, 1024]}
             />
+            <pointLight position={[-10, 10, -5]} intensity={1} color="#C4B5FD" />
+            <pointLight position={[0, -5, 5]} intensity={0.5} color="#FBBF24" />
+
             <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8B5CF6" />
 
             <PresentationControls
@@ -151,7 +155,10 @@ export function HeroScene() {
             </PresentationControls>
 
             <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2} far={4} />
-            <Environment preset="city" />
+            <BakeShadows />
+            <Suspense fallback={null}>
+                <Environment preset="city" />
+            </Suspense>
         </Canvas>
         )}
         </div>

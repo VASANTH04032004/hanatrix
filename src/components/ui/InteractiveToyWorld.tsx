@@ -2,6 +2,8 @@
 
 import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import Link from "next/link";
+
 import { Environment, ContactShadows, PresentationControls, Sparkles } from "@react-three/drei";
 import { ProductModel, ToyType } from "@/components/3d/ProductModel";
 import { motion, AnimatePresence } from "framer-motion";
@@ -68,13 +70,14 @@ export default function InteractiveToyWorld() {
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="relative min-h-[400px] lg:h-full rounded-3xl bg-dark-surface/50 backdrop-blur-md shadow-xl border border-dark-border cursor-pointer overflow-hidden group transition-all duration-300 hover:shadow-violet-primary/30 hover:shadow-2xl hover:-translate-y-2 hover:bg-dark-surface/80"
+                            className="relative min-h-[300px] md:min-h-[400px] lg:h-full rounded-3xl bg-dark-surface/50 backdrop-blur-md shadow-xl border border-dark-border cursor-pointer overflow-hidden group transition-all duration-300 hover:shadow-violet-primary/30 hover:shadow-2xl hover:-translate-y-2 hover:bg-dark-surface/80"
                             onClick={() => setSelectedProduct(product)}
                         >
                             <div className="absolute inset-0 w-full h-full pointer-events-none">
-                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 5], fov: 40 }} dpr={[1, 2]}>
-                                    <ambientLight intensity={0.5} />
-                                    <directionalLight position={[10, 10, 5]} intensity={1.5} />
+                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 5], fov: 40 }} dpr={[1, 1.5]}>
+                                    <ambientLight intensity={0.7} />
+                                    <directionalLight position={[10, 10, 5]} intensity={1.8} />
+                                    <pointLight position={[-5, 5, 5]} intensity={1} color="#C4B5FD" />
                                     <PresentationControls
                                         rotation={[0, 0, 0]}
                                         polar={[-Math.PI / 4, Math.PI / 4]}
@@ -85,7 +88,9 @@ export default function InteractiveToyWorld() {
                                             <Sparkles count={50} scale={3} size={2} speed={0.4} opacity={0.5} color={product.color} />
                                         </Suspense>
                                     </PresentationControls>
-                                    <Environment preset="city" />
+                                    <Suspense fallback={null}>
+                                        <Environment preset="city" />
+                                    </Suspense>
                                 </Canvas>}
                             </div>
 
@@ -123,9 +128,10 @@ export default function InteractiveToyWorld() {
                             </button>
 
                             <div className="w-full md:w-1/2 h-80 md:h-[500px] bg-dark-surface relative border-none border-0">
-                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 8], fov: 40 }} dpr={[1, 2]}>
-                                    <ambientLight intensity={0.7} />
-                                    <directionalLight position={[10, 10, 10]} intensity={1.5} />
+                                {container && <Canvas eventSource={container} camera={{ position: [0, 0, 8], fov: 40 }} dpr={[1, 1.5]}>
+                                    <ambientLight intensity={0.9} />
+                                    <directionalLight position={[10, 10, 10]} intensity={2} />
+                                    <pointLight position={[-10, 10, 5]} intensity={1.5} color="#A855F7" />
                                     <PresentationControls
                                         rotation={[0, 0.5, 0]}
                                     >
@@ -134,7 +140,9 @@ export default function InteractiveToyWorld() {
                                         </Suspense>
                                     </PresentationControls>
                                     <ContactShadows position={[0, -2, 0]} opacity={0.6} scale={10} blur={2} />
-                                    <Environment preset="city" />
+                                    <Suspense fallback={null}>
+                                        <Environment preset="city" />
+                                    </Suspense>
                                 </Canvas>}
                             </div>
 
@@ -159,14 +167,16 @@ export default function InteractiveToyWorld() {
                                     <span className="px-4 text-sm py-1 bg-green-100 text-green-700 font-medium rounded-full">In Stock Soon</span>
                                 </div>
 
-                                <button
+                                <Link
+                                    href="#contact"
+                                    onClick={() => setSelectedProduct(null)}
                                     className={clsx(
-                                        "w-full py-4 rounded-xl font-bold text-lg text-white transition-all transform hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-primary/30 active:translate-y-0",
+                                        "w-full py-4 rounded-xl font-bold text-lg text-white transition-all transform hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-primary/30 active:translate-y-0 text-center",
                                         "bg-gradient-to-r from-violet-primary to-violet-deep"
                                     )}
                                 >
                                     Notify Me When Available
-                                </button>
+                                </Link>
                             </div>
                         </motion.div>
                     </motion.div>

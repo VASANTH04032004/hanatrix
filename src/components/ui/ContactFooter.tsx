@@ -140,27 +140,27 @@ export default function ContactFooter() {
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">Your Name</label>
+                                <label className="block text-sm font-bold text-dark-muted mb-2">Your Name</label>
                                 <input
                                     type="text"
                                     name="name"
                                     required
-                                    className="w-full px-4 py-3 rounded-xl bg-white/60 border border-violet-light/50 text-dark-text focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
+                                    className="w-full px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-white focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
                                     placeholder="John Doe"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+                                <label className="block text-sm font-bold text-dark-muted mb-2">Email Address</label>
                                 <input
                                     type="email"
                                     name="email"
                                     required
-                                    className="w-full px-4 py-3 rounded-xl bg-white/60 border border-violet-light/50 text-dark-text focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
+                                    className="w-full px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-white focus:outline-none focus:ring-4 focus:ring-violet-primary/20 focus:border-violet-primary transition-all"
                                     placeholder="john@example.com"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">Message</label>
+                                <label className="block text-sm font-bold text-dark-muted mb-2">Message</label>
                                 <textarea
                                     name="message"
                                     required

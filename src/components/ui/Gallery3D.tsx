@@ -1,8 +1,8 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Environment, PresentationControls, RoundedBox, Float, Text, Cylinder } from "@react-three/drei";
-import { useState } from "react";
+import { Environment, PresentationControls, RoundedBox, Float, Text, Cylinder, BakeShadows } from "@react-three/drei";
+import { useState, Suspense } from "react";
 import { ProductModel } from "@/components/3d/ProductModel";
 
 function ShelfItem({ position, children }: { position: [number, number, number], children: React.ReactNode }) {
@@ -40,9 +40,10 @@ export default function Gallery3D() {
 
             <div ref={(node) => setContainer(node)} className="w-full h-[400px] md:h-[600px] relative mt-10">
                 {container && (
-                <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[10, 10, 5]} intensity={1} />
+                <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 1.5]}>
+                    <ambientLight intensity={0.8} />
+                    <directionalLight position={[10, 10, 5]} intensity={1.5} />
+                    <pointLight position={[-5, 5, 5]} intensity={1} color="#C4B5FD" />
 
                     <PresentationControls
                         rotation={[0, 0, 0]}
@@ -115,7 +116,10 @@ export default function Gallery3D() {
                         </group>
                     </PresentationControls>
 
-                    <Environment preset="city" />
+                    <BakeShadows />
+                    <Suspense fallback={null}>
+                        <Environment preset="city" />
+                    </Suspense>
                 </Canvas>
                 )}
             </div>
