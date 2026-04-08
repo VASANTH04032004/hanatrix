@@ -50,9 +50,9 @@ export default function InteractiveToyWorld() {
     return (
         <div ref={(node) => setContainer(node)} className="w-full relative py-20 bg-dark-bg overflow-hidden" id="toy-world">
             {/* Decorative background blobs */}
-            <div className="absolute top-20 left-10 w-64 h-64 bg-violet-primary/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
-            <div className="absolute top-40 right-10 w-72 h-72 bg-violet-medium/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-1/2 w-80 h-80 bg-violet-deep/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div className="hidden md:block absolute top-20 left-10 w-64 h-64 bg-violet-primary/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
+            <div className="hidden md:block absolute top-40 right-10 w-72 h-72 bg-violet-medium/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="hidden md:block absolute -bottom-8 left-1/2 w-80 h-80 bg-violet-deep/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
 
             <div className="max-w-7xl mx-auto px-4 z-10 relative">
                 <div className="text-center mb-16">
@@ -64,11 +64,11 @@ export default function InteractiveToyWorld() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 h-[500px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 h-auto lg:h-[500px]">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="relative rounded-3xl bg-dark-surface/50 backdrop-blur-md shadow-xl border border-dark-border cursor-pointer overflow-hidden group transition-all duration-300 hover:shadow-violet-primary/30 hover:shadow-2xl hover:-translate-y-2 hover:bg-dark-surface/80"
+                            className="relative min-h-[400px] lg:h-full rounded-3xl bg-dark-surface/50 backdrop-blur-md shadow-xl border border-dark-border cursor-pointer overflow-hidden group transition-all duration-300 hover:shadow-violet-primary/30 hover:shadow-2xl hover:-translate-y-2 hover:bg-dark-surface/80"
                             onClick={() => setSelectedProduct(product)}
                         >
                             <div className="absolute inset-0 w-full h-full pointer-events-none">
@@ -112,7 +112,7 @@ export default function InteractiveToyWorld() {
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
-                            className="bg-dark-surface border border-dark-border rounded-3xl shadow-2xl shadow-violet-primary/20 overflow-hidden max-w-4xl w-full flex flex-col md:flex-row relative"
+                            className="bg-dark-surface border border-dark-border rounded-3xl shadow-2xl shadow-violet-primary/20 overflow-hidden max-w-4xl w-full max-h-[90vh] overflow-y-auto flex flex-col md:flex-row relative"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button

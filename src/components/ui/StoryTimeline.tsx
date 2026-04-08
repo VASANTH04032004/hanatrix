@@ -45,7 +45,7 @@ export default function StoryTimeline() {
     const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     return (
-        <section id="story" className="py-32 bg-white relative overflow-hidden" ref={containerRef}>
+        <section id="story" className="py-32 bg-dark-bg relative overflow-hidden" ref={containerRef}>
             {/* Decorative background elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-sky-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 mix-blend-multiply opacity-60 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 mix-blend-multiply opacity-60 pointer-events-none"></div>
@@ -109,16 +109,16 @@ export default function StoryTimeline() {
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true, margin: "-50px" }}
                                             transition={{ duration: 0.5 }}
-                                            className="bg-white p-6 rounded-2xl shadow-md border border-gray-50 relative overflow-hidden"
+                                            className="bg-dark-surface p-6 rounded-2xl shadow-lg border border-dark-border relative overflow-hidden"
                                         >
                                             <div className={`absolute top-0 left-0 w-2 h-full ${event.color}`}></div>
                                             <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-3 ${event.color}`}>
                                                 {event.year}
                                             </span>
-                                            <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
+                                            <h3 className="font-display text-xl font-bold text-dark-text mb-2">
                                                 {event.title}
                                             </h3>
-                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                            <p className="text-dark-muted text-sm leading-relaxed">
                                                 {event.description}
                                             </p>
                                         </motion.div>

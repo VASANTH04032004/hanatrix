@@ -38,7 +38,7 @@ export default function Gallery3D() {
                 </div>
             </div>
 
-            <div ref={(node) => setContainer(node)} className="w-full h-[600px] relative mt-10">
+            <div ref={(node) => setContainer(node)} className="w-full h-[400px] md:h-[600px] relative mt-10">
                 {container && (
                 <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
                     <ambientLight intensity={0.5} />

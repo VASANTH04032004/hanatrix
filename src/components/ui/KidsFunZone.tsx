@@ -116,7 +116,7 @@ export default function KidsFunZone() {
             </div>
 
             {/* Game Area */}
-            <div className="relative w-full h-[500px] border-y-4 border-dashed border-violet-light/50 bg-white/40 backdrop-blur-md overflow-hidden rounded-[3rem] mx-4 md:mx-auto max-w-6xl shadow-inner cursor-crosshair">
+            <div className="relative w-[calc(100%-2rem)] md:w-full h-[500px] border-y-4 border-dashed border-violet-light/50 bg-white/40 backdrop-blur-md overflow-hidden rounded-[3rem] mx-auto max-w-6xl shadow-inner cursor-crosshair">
 
                 {!isPlaying && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-50">

@@ -35,7 +35,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display font-bold text-6xl md:text-8xl lg:text-[7rem] tracking-tight text-dark-text mb-6 drop-shadow-sm leading-tight">
+            className="font-display font-bold text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] tracking-tight text-dark-text mb-6 drop-shadow-sm leading-tight">
             <span className="text-purple-300">Enter the</span> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-deep via-violet-primary to-violet-light animate-gradient-x bg-[length:200%_auto]">
               Magic Toy Universe
