@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense, useRef } from "react";
+import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, ContactShadows, PresentationControls, Sparkles } from "@react-three/drei";
 import { ProductModel, ToyType } from "@/components/3d/ProductModel";
@@ -48,7 +48,7 @@ export default function InteractiveToyWorld() {
     const [container, setContainer] = useState<HTMLElement | null>(null);
 
     return (
-        <div ref={setContainer as any} className="w-full relative py-20 bg-dark-bg overflow-hidden" id="toy-world">
+        <div ref={(node) => setContainer(node)} className="w-full relative py-20 bg-dark-bg overflow-hidden" id="toy-world">
             {/* Decorative background blobs */}
             <div className="absolute top-20 left-10 w-64 h-64 bg-violet-primary/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
             <div className="absolute top-40 right-10 w-72 h-72 bg-violet-medium/10 rounded-full mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>

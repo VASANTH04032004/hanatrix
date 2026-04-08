@@ -108,7 +108,7 @@ function ToyTrain({ position }: { position: [number, number, number] }) {
 export function HeroScene() {
     const [container, setContainer] = useState<HTMLElement | null>(null);
     return (
-        <div ref={setContainer as any} className="w-full h-full relative" style={{ touchAction: 'none' }}>
+        <div ref={(node) => setContainer(node)} className="w-full h-full relative" style={{ touchAction: 'none' }}>
             {container && (
             <Canvas eventSource={container} camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]} shadows>
             <color attach="background" args={['transparent']} />
